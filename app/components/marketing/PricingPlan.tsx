@@ -1,4 +1,16 @@
-function PricingPlan({ title, price, perks, icon }) {
+import { IconType } from "react-icons";
+
+function PricingPlan({
+  title,
+  price,
+  perks,
+  icon,
+}: {
+  title: string;
+  price: string;
+  perks: string[];
+  icon: IconType;
+}) {
   const Icon = icon;
   return (
     <article>
@@ -15,7 +27,7 @@ function PricingPlan({ title, price, perks, icon }) {
             <li key={perk}>{perk}</li>
           ))}
         </ol>
-        <div className='actions'>
+        <div className="actions">
           <a href="/not-implemented">Learn More</a>
         </div>
       </div>

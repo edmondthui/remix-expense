@@ -1,4 +1,12 @@
-function ExpenseListItem({ title, amount }) {
+function ExpenseListItem({
+  title,
+  amount,
+  id,
+}: {
+  id: string;
+  title: string;
+  amount: number;
+}) {
   function deleteExpenseItemHandler() {
     // tbd
   }

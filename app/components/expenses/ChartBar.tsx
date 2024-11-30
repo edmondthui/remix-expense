@@ -1,8 +1,16 @@
-const ChartBar = ({ maxValue, value, label }) => {
-  let barFillHeight = '0%';
+const ChartBar = ({
+  maxValue,
+  value,
+  label,
+}: {
+  maxValue: number;
+  value: number;
+  label: string;
+}) => {
+  let barFillHeight = "0%";
 
   if (maxValue > 0) {
-    barFillHeight = Math.round((value / maxValue) * 100) + '%';
+    barFillHeight = Math.round((value / maxValue) * 100) + "%";
   }
 
   return (
