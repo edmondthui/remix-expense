@@ -5,6 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import MainHeader from "~/components/navigation/MainHeader";
 import type { LinksFunction } from "@remix-run/node";
 
 import sharedStyles from "~/styles/shared.css?url";
@@ -33,6 +34,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <MainHeader />
         {children}
         <ScrollRestoration />
         <Scripts />
