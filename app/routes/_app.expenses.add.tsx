@@ -3,6 +3,7 @@ import { redirect, useNavigate } from "@remix-run/react";
 import ExpenseForm from "~/components/expenses/ExpenseForm";
 import { EF } from "~/components/expenses/Types";
 import Modal from "~/components/util/Modal";
+import { requireUserSession } from "~/data/auth.server";
 import { addExpense } from "~/data/expenses.server";
 import { validateExpenseInput } from "~/data/validation.server";
 
@@ -19,6 +20,7 @@ export default function AddExpense() {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
+  const userId = await requireUserSession(request);
   const formData = await request.formData();
   const expenseData = Object.fromEntries(formData);
   const validatedExpenseData = EF.parse(expenseData);
@@ -27,6 +29,6 @@ export async function action({ request }: ActionFunctionArgs) {
   } catch (error) {
     return error;
   }
-  await addExpense(validatedExpenseData);
+  await addExpense(validatedExpenseData, userId);
   return redirect("/expenses");
 }

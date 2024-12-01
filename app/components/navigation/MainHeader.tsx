@@ -4,7 +4,6 @@ import { loader } from "~/routes/_marketing";
 
 function MainHeader() {
   const userId = useLoaderData<typeof loader>();
-  console.log(userId);
   return (
     <header id="main-header">
       <Logo />

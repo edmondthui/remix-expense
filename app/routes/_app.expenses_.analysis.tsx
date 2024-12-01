@@ -1,3 +1,4 @@
+import { LoaderFunctionArgs } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   Link,
@@ -7,6 +8,7 @@ import {
 import Chart from "~/components/expenses/Chart";
 import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
 import ErrorComponent from "~/components/util/ErrorComponent";
+import { requireUserSession } from "~/data/auth.server";
 import { getExpenses } from "~/data/expenses.server";
 
 export default function ExpensesAnalysis() {
@@ -19,8 +21,9 @@ export default function ExpensesAnalysis() {
   );
 }
 
-export async function loader() {
-  const expenses = await getExpenses();
+export async function loader({ request }: LoaderFunctionArgs) {
+  const userId = await requireUserSession(request);
+  const expenses = await getExpenses(userId);
   if (!expenses || expenses.length === 0) {
     throw Response.json(
       { message: "Could not find any expenses." },
