@@ -24,6 +24,7 @@ function ExpenseForm() {
   const validatedExpenseData = Expenses.parse(expenseData);
   const expense = validatedExpenseData.find((data) => data.id === params.id);
   // const expenseData = useLoaderData<typeof loader>();
+  console.log(expense);
   const defaultValues = expense
     ? {
         title: expense.title,
