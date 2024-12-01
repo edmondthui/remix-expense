@@ -1,5 +1,5 @@
-import { DUMMY_EXPENSES } from "./_app.expenses";
+import { getExpenses } from "~/data/expenses.server";
 
 export function loader() {
-  return DUMMY_EXPENSES;
+  return getExpenses();
 }

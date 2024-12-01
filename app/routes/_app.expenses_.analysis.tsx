@@ -1,12 +1,18 @@
-import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
+import { useLoaderData } from "@remix-run/react";
 import Chart from "~/components/expenses/Chart";
-import { DUMMY_EXPENSES } from "./_app.expenses";
+import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
+import { getExpenses } from "~/data/expenses.server";
 
 export default function ExpensesAnalysis() {
+  const expenses = useLoaderData<typeof loader>();
   return (
     <main>
-      <Chart expenses={DUMMY_EXPENSES} />
-      <ExpenseStatistics expenses={DUMMY_EXPENSES} />
+      <Chart expenses={expenses} />
+      <ExpenseStatistics expenses={expenses} />
     </main>
   );
+}
+
+export function loader() {
+  return getExpenses();
 }
