@@ -1,5 +1,5 @@
 import { LinksFunction } from "@remix-run/node";
-import authStyles from "~/styles/auth.css";
+import authStyles from "~/styles/auth.css?url";
 import AuthForm from "~/components/auth/AuthForm";
 
 export default function Auth() {
