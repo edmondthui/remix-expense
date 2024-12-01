@@ -17,8 +17,17 @@ export const EF = z.object({
   amount: z.string(),
   title: z.string(),
 });
-
 export type EF = z.infer<typeof EF>;
+
+export const ZAuth = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+export type ZAuth = z.infer<typeof ZAuth>;
+export type AuthError = {
+  email?: string;
+  password?: string;
+};
 
 export type ExpenseError = {
   title?: string;
