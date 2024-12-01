@@ -46,6 +46,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
   }
   if (request.method === "DELETE") {
     await deleteExpense(validatedExpenseId);
-    return redirect("/expenses");
+    return { deletedId: expenseId };
   }
 }

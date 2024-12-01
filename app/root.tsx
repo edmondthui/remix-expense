@@ -1,14 +1,17 @@
+import type { LinksFunction } from "@remix-run/node";
 import {
+  isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from "@remix-run/react";
-import MainHeader from "~/components/navigation/MainHeader";
-import type { LinksFunction } from "@remix-run/node";
 
 import sharedStyles from "~/styles/shared.css?url";
+import ErrorComponent from "./components/util/ErrorComponent";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -40,6 +43,44 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  if (isRouteErrorResponse(error)) {
+    return (
+      <main>
+        <ErrorComponent title={error.statusText}>
+          <>
+            <p>
+              {error.data?.message ||
+                "Something went wrong. Please try again later."}
+            </p>
+            <p>
+              Back to <Link to="/">safety</Link>.
+            </p>
+          </>
+        </ErrorComponent>
+      </main>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <main>
+        <ErrorComponent title={"An error occurred"}>
+          <>
+            <p>
+              {error.message || "Something went wrong. Please try again later."}
+            </p>
+            <p>
+              Back to <Link to="/">safety</Link>.
+            </p>
+          </>
+        </ErrorComponent>
+      </main>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
 }
 
 export default function App() {
