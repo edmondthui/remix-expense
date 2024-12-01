@@ -16,3 +16,9 @@ export const EF = z.object({
 });
 
 export type EF = z.infer<typeof EF>;
+
+export type ExpenseError = {
+  title?: string;
+  amount?: string;
+  date?: string;
+};
